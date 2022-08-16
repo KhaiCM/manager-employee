@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use DateTime;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -16,8 +16,9 @@ class MTypeFormSeeder extends Seeder
     public function run()
     {
         DB::table('m_type_forms')->insert([
-            ['name' => 'Tardiness', 'created_at' => new DateTime, 'updated_at' => new DateTime],
-            ['name' => 'Leave early', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['name' => 'Tardiness', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Leave early', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Unpaid leave', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ]);
     }
 }
