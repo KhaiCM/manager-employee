@@ -15,10 +15,23 @@ class MTypeFormSeeder extends Seeder
      */
     public function run()
     {
+        $now = Carbon::now();
         DB::table('m_type_forms')->insert([
-            ['name' => 'Tardiness', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Leave early', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Unpaid leave', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            [
+                'name' => 'Tardiness',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'name' => 'Leave early',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'name' => 'Unpaid leave',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
         ]);
     }
 }
