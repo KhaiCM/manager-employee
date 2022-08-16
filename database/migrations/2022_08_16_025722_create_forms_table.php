@@ -21,14 +21,6 @@ class CreateFormsTable extends Migration
             $table->text('reason')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreignId('user_id')
-                ->constrained('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            $table->foreignId('m_type_form_id')
-                ->constrained('m_type_forms')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
         });
     }
 
