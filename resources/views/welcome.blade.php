@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Laravel</title>
-    <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet" />
-
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}" />
+    <title>Login</title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Nucleo Icons -->
+    <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
+    <!-- Main Styling -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <div id="app"></div>
-    </div>
+
+<body class="m-0 font-sans antialiased font-normal bg-white text-start text-size-base leading-default text-slate-500">
+    <main class="mt-0 transition-all duration-200 ease-in-out">
+        <section id="app"></section>
+    </main>
     <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
 </body>
 </html>

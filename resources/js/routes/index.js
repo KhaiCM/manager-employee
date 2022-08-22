@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './components/Home.vue';
+import Dashboard from '../pages/Dashboard.vue';
+import Home from '../pages/Home.vue';
+import Register from '../pages/Register.vue';
+import Login from '../pages/Login.vue';
 Vue.use(Router);
 
 export default new Router({
