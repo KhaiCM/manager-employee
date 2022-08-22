@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Contracts\FormRepositoryInterface;
 use App\Contracts\MTypeFormRepositoryInterface;
+use App\Contracts\PasswordResetRepositoryInterface;
 use App\Contracts\UserRepositoryInterface;
 use App\Repositories\FormRepository;
 use App\Repositories\MTypeFormRepository;
+use App\Repositories\PasswordResetRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -37,6 +39,7 @@ class RepositoryServiceProvider extends ServiceProvider
     protected $repositories = [
         UserRepositoryInterface::class => UserRepository::class,
         FormRepositoryInterface::class => FormRepository::class,
+        PasswordResetRepositoryInterface::class => PasswordResetRepository::class,
         MTypeFormRepositoryInterface::class => MTypeFormRepository::class,
     ];
 }
