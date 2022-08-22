@@ -22,7 +22,7 @@ if (!function_exists('defineResponse')) {
         if (!empty($data)) {
             $responses['data'] = $data;
         }
-        
+
         return response()->json(
             array_merge($responses, $other),
             $status
