@@ -1,6 +1,9 @@
 /node_modules
 /public/hot
 /public/storage
+/public/js
+/public/assets
+/public/css
 /storage/*.key
 /vendor
 .env
@@ -13,3 +16,5 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/public/mix-manifest.json
+package-lock.json
