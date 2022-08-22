@@ -2,42 +2,30 @@
 
 use Illuminate\Http\JsonResponse;
 
-if (!function_exists('responseError')) {
+if (!function_exists('defineResponse')) {
     /**
      * Define response message error
      *
      * @param $message
      * @param $status
-     * @return JsonResponse
-     */
-    function responseError($message, $status, $other = []): JsonResponse
-    {
-        return response()->json(array_merge([
-            'status' => $status,
-            'message' => $message,
-            'success' => false,
-        ], $other), $status);
-    }
-}
-
-if (!function_exists('defineResponse')) {
-    /**
-     * Define response
-     *
-     * @param $message
      * @param $data
+     * @param $other
      * @return JsonResponse
      */
-    function defineResponse($message, $data = []): JsonResponse
+    function defineResponse($message, $status = 200, $data = [], $other = []): JsonResponse
     {
         $responses = [
+            'status' => $status,
             'message' => $message,
         ];
 
         if (!empty($data)) {
             $responses['data'] = $data;
         }
-
-        return response()->json($responses);
+        
+        return response()->json(
+            array_merge($responses, $other),
+            $status
+        );
     }
 }
