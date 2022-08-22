@@ -17,4 +17,17 @@ class UserRepository extends EloquentRepository implements UserRepositoryInterfa
     {
         $this->model = $model;
     }
+
+    /**
+     * Get one user with email
+     * 
+     * string $email
+     * @return mixed
+     */
+    public function getUserByEmail($email)
+    {
+        return $this->model
+            ->where('email', $email)
+            ->first();
+    }
 }
