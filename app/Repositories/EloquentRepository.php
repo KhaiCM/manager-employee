@@ -112,9 +112,9 @@ abstract class EloquentRepository implements RepositoryInterface
      * string $value
      * @return mixed
      */
-    public function where($column, $operator = '=', $value)
+    public function where($column, $value, $operator = '=')
     {
-        return $this->model->where($column, $operator, $value);
+        return $this->model->where($column, $value, $operator);
     }
 
     /**
