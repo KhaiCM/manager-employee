@@ -68,7 +68,7 @@ interface RepositoryInterface
      * string $value
      * @return mixed
      */
-    public function where($column, $operator = '=', $value);
+    public function where($column, $value, $operator = '=');
 
     /**
      * Add a simple where in clause to the query
