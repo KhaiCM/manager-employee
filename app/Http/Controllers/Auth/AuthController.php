@@ -49,7 +49,7 @@ class AuthController extends Controller
             );
         }
 
-        return responseError(
+        return defineResponse(
             __('messages.register-fail'),
             Response::HTTP_BAD_REQUEST
         );
@@ -68,7 +68,7 @@ class AuthController extends Controller
         ]);
 
         if (!$token) {
-            return responseError(
+            return defineResponse(
                 __('messages.login-fail'),
                 Response::HTTP_BAD_REQUEST
             );
@@ -118,7 +118,7 @@ class AuthController extends Controller
                 __('messages.send-password-reset-mail')
             );
         } else {
-            return responseError(
+            return defineResponse(
                 __('messages.wrong'),
                 Response::HTTP_BAD_REQUEST
             );
@@ -141,7 +141,7 @@ class AuthController extends Controller
             );
         }
 
-        return responseError(
+        return defineResponse(
             __('messages.reset-password-fail'),
             Response::HTTP_BAD_REQUEST
         );
