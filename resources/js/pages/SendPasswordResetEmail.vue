@@ -7,54 +7,36 @@
                     <div
                         class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none lg:py4 dark:bg-gray-950 rounded-2xl bg-clip-border">
                         <div class="p-6 pb-0 mb-0">
-                            <h4 class="font-bold">Sign In</h4>
+                            <h4 class="font-bold">Send password reset email</h4>
                             <p class="mb-0">
-                                Enter your email and password to sign in
+                                Enter your email to reset password
                             </p>
-                            <div class="text-pink-900 text-sm text-center bg-blue-100 p-2" v-if="error">
-                                error
-                            </div>
                         </div>
 
                         <div class="flex-auto p-6">
-                            <form autocomplete="off" @submit.prevent="login" method="post">
+                            <form autocomplete="off" @submit.prevent="sendMail" method="post">
                                 <div class="mb-4">
                                     <input type="email" placeholder="Email" name="email" v-model="email" required
                                         class="focus:shadow-primary-outline text-size-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding p-3 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none" />
                                     <small class="text-red-500">error</small>
                                 </div>
 
-                                <div class="mb-4">
-                                    <input type="password" placeholder="Password" name="password" v-model="password"
-                                        required
-                                        class="focus:shadow-primary-outline text-size-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding p-3 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none" />
-                                    <small class="text-red-500">error</small>
-                                </div>
-
-                                <div>
-                                    <a href="#"
-                                        class="hover:text-indigo-400 cursor-pointer font-semibold text-transparent bg-clip-text bg-gradient-to-tl from-blue-500 to-violet-500">
-                                        <router-link :to="{ name: 'sendMail' }">Forgot password</router-link>
-                                    </a>
-                                </div>
-
                                 <div class="text-center">
                                     <button type="submit"
                                         class="inline-block w-full px-16 py-3.5 mt-6 mb-0 font-bold leading-normal text-center text-white align-middle transition-all bg-blue-500 border-0 rounded-lg cursor-pointer hover:-translate-y-px active:opacity-85 hover:shadow-xs text-size-sm ease-in tracking-tight-rem shadow-md bg-150 bg-x-25">
-                                        Sign in
+                                        Send mail
                                     </button>
                                 </div>
                             </form>
                         </div>
                         <div
                             class="border-black/12.5 rounded-b-2xl border-t-0 border-solid p-6 text-center pt-0 px-1 sm:px-6">
-                            <p class="mx-auto mb-6 leading-normal text-size-sm">
-                                Don't have an account?
-                                <a href="#"
-                                    class="font-semibold text-transparent bg-clip-text bg-gradient-to-tl from-blue-500 to-violet-500">
-                                    <router-link :to="{ name: 'register' }">Sign up</router-link>
-                                </a>
-                            </p>
+                            <a href="#"
+                                class="font-semibold text-transparent bg-clip-text bg-gradient-to-tl from-blue-500 to-violet-500">
+                                <router-link :to="{ name: 'register' }">Sign up</router-link>
+                                |
+                                <router-link :to="{ name: 'login' }">Sign in</router-link>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -78,32 +60,17 @@
         </div>
     </div>
 </template>
-
 <script>
 export default {
     data() {
         return {
             email: null,
-            password: null,
             error: false,
         };
     },
     methods: {
-        login() {
-            let app = this;
-            this.$auth.login({
-                params: {
-                    email: app.email,
-                    password: app.password,
-                },
-                success: function (response) { },
-                error: function () {
-                    app.error = true
-                },
-                rememberMe: true,
-                redirect: "/dashboard",
-                fetchUser: true,
-            });
+        sendMail() {
+            //
         },
     },
 };
