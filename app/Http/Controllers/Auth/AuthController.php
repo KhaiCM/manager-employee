@@ -45,6 +45,7 @@ class AuthController extends Controller
         if ($user) {
             return defineResponse(
                 __('messages.register-success'),
+                Response::HTTP_OK,
                 $user
             );
         }
@@ -76,6 +77,7 @@ class AuthController extends Controller
 
         return defineResponse(
             __('messages.login-success'),
+            Response::HTTP_OK,
             $this->createNewToken($token)
         );
     }
@@ -90,7 +92,8 @@ class AuthController extends Controller
         auth()->logout();
 
         return defineResponse(
-            __('messages.logout-success')
+            __('messages.logout-success'),
+            Response::HTTP_OK
         );
     }
 
@@ -115,7 +118,8 @@ class AuthController extends Controller
             $this->mailService->sendPasswordResetMail($request->email, $token);
             
             return defineResponse(
-                __('messages.send-password-reset-mail')
+                __('messages.send-password-reset-mail'),
+                Response::HTTP_OK
             );
         } else {
             return defineResponse(
