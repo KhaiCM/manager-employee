@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Traits\FailedValidation;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
 {
+    use FailedValidation;
     /**
      * Determine if the user is authorized to make this request.
      *
