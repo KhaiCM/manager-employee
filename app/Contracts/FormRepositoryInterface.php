@@ -6,5 +6,11 @@ use App\Contracts\RepositoryInterface;
 
 interface FormRepositoryInterface extends RepositoryInterface
 {
-    public function getFormsByUser($user_id);
+    /**
+     * Get a list of forms belong to user
+     *
+     * @param int $userId
+     * @return mixed
+     */
+    public function getFormsByUser($userId);
 }

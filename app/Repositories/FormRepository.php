@@ -21,13 +21,13 @@ class FormRepository extends EloquentRepository implements FormRepositoryInterfa
     /**
      * Get a list of forms belong to user
      *
-     * @param int $user_id
+     * @param int $userId
      * @return mixed
      */
-    public function getFormsByUser($user_id)
+    public function getFormsByUser($userId)
     {
         return $this->model
-            ->where('user_id', $user_id)
+            ->where('user_id', $userId)
             ->get();
     }
 }

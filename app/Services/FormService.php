@@ -70,11 +70,11 @@ class FormService
     /**
      * Get a list of forms belong to user
      *
-     * @param int $user_id
+     * @param int $userId
      * @return mixed
      */
-    public function getListOfFormsByUser($user_id)
+    public function getListOfFormsByUser($userId)
     {
-        return $this->formRepository->getFormsByUser($user_id);
+        return $this->formRepository->getFormsByUser($userId);
     }
 }
