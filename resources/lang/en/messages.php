@@ -6,6 +6,8 @@ return [
     'login-fail' => 'Login unsuccessful!',
     'login-success' => 'Login successfully!',
     'logout-success' => 'User successfully signed out!',
+    'create-fail' => 'Create unsuccessful!',
+    'create-success' => 'Create successfully!',
     'update-fail' => 'Update unsuccessful!',
     'update-success' => 'Update successfully!',
     'delete-fail' => 'Delete unsuccessful!',
