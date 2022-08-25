@@ -12,7 +12,7 @@ interface RepositoryInterface
     public function all();
 
     /**
-     * Get one data
+     * Get data by id
      * 
      * int|array $id
      * @return mixed
@@ -79,4 +79,20 @@ interface RepositoryInterface
      * @return mixed
      */
     public function whereIn($column, $values);
+
+    /**
+     * Delete data by id
+     *
+     * integer $id
+     * @return mixed
+     */
+    public function delete($id);
+
+    /**
+     * Get one data by id
+     *
+     * integer $id
+     * @return mixed
+     */
+    public function getDataById($id);
 }

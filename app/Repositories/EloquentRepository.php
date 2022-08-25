@@ -129,4 +129,30 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         return $this->model->whereIn($column, $values);
     }
+
+    /**
+     * Delete by id
+     *
+     * integer $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        $result = $this->find($id);
+
+        return $result ? $result->delete() : $result;
+    }
+
+            /**
+     * Get one data by id
+     *
+     * integer $id
+     * @return mixed
+     */
+    public function getDataById($id)
+    {
+        $result = $this->find($id);
+
+        return $result ? $result->first() : $result;
+    }
 }
