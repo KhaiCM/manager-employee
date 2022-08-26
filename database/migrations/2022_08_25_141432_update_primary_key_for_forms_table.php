@@ -26,8 +26,7 @@ class UpdatePrimaryKeyForFormsTable extends Migration
     public function down()
     {
         Schema::table('forms', function (Blueprint $table) {
-            $table->alterColumn('forms', 'id', 'uuid');
-            $table->dropPrimaryKey('id', 'forms');
+            $table->dropPrimary();
         });
     }
 }
