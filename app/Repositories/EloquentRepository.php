@@ -12,7 +12,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * EloquentRepository construct
      * 
-     * Model $model
+     * @param Model $model
      * @return void
      */
     public function __construct(Model $model)
@@ -33,7 +33,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Get one data
      * 
-     * int|array $id
+     * @param string|integer|array $id
      * @return mixed
      */
     public function find($id)
@@ -44,7 +44,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Create data
      * 
-     * array $attributes
+     * @param array $attributes
      * @return mixed
      */
     public function create($attributes = [])
@@ -55,8 +55,8 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Update data
      * 
-     * int $id
-     * array $attributes
+     * @param string|integer $id
+     * @param array $attributes
      * @return mixed
      */
     public function update($id, $attributes = [])
@@ -74,7 +74,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Insert data
      * 
-     * array $attributes
+     * @param array $attributes
      * @return bool
      */
     public function insert($attributes = []): bool
@@ -85,7 +85,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Get first data
      * 
-     * array $columns
+     * @param array $columns
      * @return mixed
      */
     public function first($columns = ['*'])
@@ -96,7 +96,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Get data
      * 
-     * array $columns
+     * @param array $columns
      * @return mixed
      */
     public function get($columns = ['*'])
@@ -107,9 +107,9 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Add a simple where clause to the query.
      *
-     * string $column
-     * string $operator
-     * string $value
+     * @param string $column
+     * @param string $operator
+     * @param string $value
      * @return mixed
      */
     public function where($column, $value, $operator = '=')
@@ -120,9 +120,8 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Add a simple where in clause to the query
      *
-     * string $column
-     * mixed $values
-     *
+     * @param string $column
+     * @param mixed $values
      * @return mixed
      */
     public function whereIn($column, $values)
@@ -133,7 +132,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Delete by id
      *
-     * integer $id
+     * @param string|integer $id
      * @return mixed
      */
     public function delete($id)
@@ -146,7 +145,7 @@ abstract class EloquentRepository implements RepositoryInterface
             /**
      * Get one data by id
      *
-     * integer $id
+     * @param string|integer $id
      * @return mixed
      */
     public function getDataById($id)

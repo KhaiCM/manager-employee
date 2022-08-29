@@ -7,6 +7,7 @@ use App\Http\Requests\CreateFormRequest;
 use App\Contracts\FormRepositoryInterface;
 use App\Contracts\UserRepositoryInterface;
 use App\Enums\StatusForm;
+use App\Http\Requests\ChangeStatusFormRequest;
 
 class FormService
 {
@@ -76,5 +77,47 @@ class FormService
     public function getListOfFormsByUser($userId)
     {
         return $this->formRepository->getFormsByUser($userId);
+    }
+
+    /**
+     * Change status of form
+     *
+     * @param ChangeStatusFormRequest $request
+     * @param string $id
+     * @return mixed
+     */
+    public function updateStatusForm($request, $id)
+    {
+        return $this->formRepository->update($id, [
+            'status' => $request->status,
+        ]);
+    }
+
+    /**
+     * Change information of form
+     *
+     * @param CreateFormRequest $request
+     * @param string $id
+     * @return mixed
+     */
+    public function updateInfoForm($request, $id)
+    {
+        return $this->formRepository->update($id, [
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'reason' => $request->reason,
+            'm_type_form_id' => $request->m_type_form_id,
+        ]);
+    }
+
+    /**
+     * Get data of form by id
+     *
+     * @param string $id
+     * @return mixed
+     */
+    public function getFormById($id)
+    {
+        return $this->formRepository->getDataById($id);
     }
 }
