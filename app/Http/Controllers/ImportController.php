@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImportRequest;
+use App\Services\ImportService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,9 +15,14 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 class ImportController extends Controller
 {
     protected $userService;
+    protected $importService;
 
-    public function __construct(UserService $userService) {
+    public function __construct(
+        UserService $userService,
+        ImportService $importService
+    ) {
         $this->userService = $userService;
+        $this->importService = $importService;
     }
 
     public function index()
@@ -30,6 +36,10 @@ class ImportController extends Controller
 
     public function import(ImportRequest $request)
     {
-        return;
+        $file = $request->file('uploaded_file');
+
+        $result = $this->importService->importFileToUsersTable($file);
+        dd($result);
+        return $result;
     }
 }

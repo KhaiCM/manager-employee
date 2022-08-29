@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\FileName;
+use App\Rules\MimeTypes;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ImportRequest extends FormRequest
@@ -28,9 +29,9 @@ class ImportRequest extends FormRequest
             'uploaded_file' => [
                 'required',
                 'file',
-                'mimes:csv,tsv,xls,xlsx',
                 'max:4096',
                 new FileName(100),
+                new MimeTypes(['csv','tsv','xls','xlsx']),
             ],
         ];
     }
