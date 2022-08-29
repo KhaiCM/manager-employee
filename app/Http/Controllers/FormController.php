@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\StatusForm;
+use App\Http\Requests\ChangeStatusFormRequest;
 use App\Http\Requests\CreateFormRequest;
 use App\Services\FormService;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
@@ -83,15 +84,61 @@ class FormController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update status of form by admin
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  ChangeStatusFormRequest  $request
+     * @param  string  $id
      * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function changeStatusByAdmin(ChangeStatusFormRequest $request, $id)
     {
-        //
+        $form = $this->formService->getFormById($id);
+
+        if ($form->status < $request->status) {
+            $result = $this->formService->updateStatusForm($request, $id);
+
+            if ($result) {
+                return defineResponse(
+                    __('messages.update_success'),
+                    Response::HTTP_OK,
+                    $result
+                );
+            }
+        }
+
+        return defineResponse(
+            __('messages.update_fail'),
+            Response::HTTP_BAD_REQUEST,
+        );
+    }
+
+    /**
+     * Update information of form only employee
+     *
+     * @param  CreateFormRequest  $request
+     * @param  string  $id
+     * @return JsonResponse
+     */
+    public function changeInfoOnlyEmployee(CreateFormRequest $request, $id)
+    {
+        $form = $this->formService->getFormById($id);
+
+        if ($form->status == StatusForm::WAITING) {
+            $result = $this->formService->updateInfoForm($request, $id);
+
+            if ($result) {
+                return defineResponse(
+                    __('messages.update_success'),
+                    Response::HTTP_OK,
+                    $result
+                );
+            }
+        }
+
+        return defineResponse(
+            __('messages.update_fail'),
+            Response::HTTP_BAD_REQUEST,
+        );
     }
 
     /**
