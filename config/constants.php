@@ -2,13 +2,14 @@
 
 return [
     'import' => [
-        'user' => [
+        'form' => [
             'A' => 'no',
-            'B' => 'name',
-            'C' => 'staff_code',
-            'D' => 'email',
+            'B' => 'status',
+            'C' => 'start_time',
+            'D' => 'end_time',
+            'E' => 'reason',
+            'F' => 'user',
+            'G' => 'type',
         ],
     ]
-
-
 ];

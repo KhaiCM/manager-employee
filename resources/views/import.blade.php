@@ -40,14 +40,14 @@
                                     </small>
                                 </label>
                                 <div class="input-group">
-                                    <input 
+                                    <input
                                         accept=".csv, .tsv, .xls, .xlsx"
                                         type="file" required class="form-control"
                                         name="uploaded_file" id="uploaded_file"
                                     >
                                     @error('uploaded_file')
                                         <p class="text-right mb-0">
-                                            <small 
+                                            <small
                                                 class="danger text-muted"
                                                 id="file-error"
                                             >
@@ -71,7 +71,7 @@
                 <br />
                 <div class="card">
                     <div class="card-header bgsize-primary-4 white card-header">
-                        <h4 class="card-title">Customer Data Table</h4>
+                        <h4 class="card-title">Form Data Table</h4>
                     </div>
                     <div class="card-body">
                         <div class="pull-right">
@@ -82,17 +82,28 @@
                         <div class=" card-content table-responsive">
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Staff code</th>
+                                    <th>No</th>
+                                    <th>User</th>
+                                    <th>Type</th>
+                                    <th>Start time</th>
+                                    <th>End time</th>
+                                    <th>Reason</th>
+                                    <th>Status</th>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $i = 1;
+                                    @endphp
                                     @if (!empty($data) && $data->count())
-                                        @foreach ($data as $row)
+                                        @foreach ($data as $form)
                                             <tr>
-                                                <td>{{ $row->name }}</td>
-                                                <td>{{ $row->staff_code }}</td>
-                                                <td>{{ $row->email }}</td>
+                                                <td>{{ $i++ }}</td>
+                                                <td>{{ $form->user_id }}</td>
+                                                <td>{{ $form->m_type_form_id }}</td>
+                                                <td>{{ $form->start_time }}</td>
+                                                <td>{{ $form->end_time }}</td>
+                                                <td>{{ $form->reason }}</td>
+                                                <td>{{ $form->status }}</td>
                                             </tr>
                                         @endforeach
                                     @else

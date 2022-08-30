@@ -21,30 +21,26 @@ class ImportService
         $this->userRepository = $userRepository;
     }
 
-    public function importFileToUsersTable($file)
+    public function importFileToFormsTable($file)
     {
+        $messages = [];
         $extension = $file->getClientOriginalExtension();
-
-        if ($extension == 'csv') {
-
-        }
-
         switch ($extension) {
             case 'csv':
                 $data = get_csv_data($file);
 
                 $reader = new Csv();
-                $data = $reader->setDelimiter(',')
+                $sheetData = $reader->setDelimiter(',')
                         ->setInputEncoding('Shift-JIS')
                         ->load($file)
                         ->getActiveSheet()
                         ->toArray(null, true, true, true);
                 break;
             case 'tsv':
-                $data = get_tsv_data($file);
+                $sheetData = get_tsv_data($file);
                 break;
             default:
-                $data = get_excel_data($file);
+                $sheetData = get_excel_data($file);
                 break;
         }
 
@@ -54,26 +50,38 @@ class ImportService
                 array_shift($data);
                 array_shift($sheetData);
 
-                $this->handleImportFile($sheetData, $data);
+                $this->handleImportFile($sheetData, $data, $messages);
+            } else {
+                $messages[] = __('messages.import.dont_have_header');
             }
         }
 
         return true;
     }
 
-    public function handleImportFile($sheetData, $data)
+    public function handleImportFile($sheetData, $data, $messages)
     {
-        $this->checkSheetData($sheetData);
+        if ($this->checkSheetData($sheetData)) {
+            foreach ($sheetData as $key => $row) {
+                if ($this->checkNoColumnBetweenFileAndFormsTable($row)) {
+                    $this->validateBeforeImport($row);
+                } else {
+                    $messages[] = __('messages.import.no_column_invalid', ['line' => $key]);
+                }
+            }
+        } else {
+            $messages[] = __('messages.import.none_data');
+        }
     }
 
     public function checkHeader($headers)
     {
-        if (count($headers) != count(config('constants.import.user'))) {
+        if (count($headers) != count(config('constants.import.form'))) {
             return false;
         }
 
         foreach ($headers as $item) {
-            if (! in_array(strToSlug($item), array_values(config('constants.import.user')))) {
+            if (! in_array(strToSlug($item), array_values(config('constants.import.form')))) {
                 return false;
             }
         }
@@ -83,11 +91,17 @@ class ImportService
 
     public function checkSheetData($sheetData)
     {
-        if (count($sheetData) === 0) {
-            return false;
-        }
+        return count($sheetData) != 0 ?: false;
+    }
 
-        return true;
+    public function checkNoColumnBetweenFileAndFormsTable($row)
+    {
+        return count($row) == count(config('constants.import.form')) ?: false;
+    }
+
+    public function validateBeforeImport($row)
+    {
+        # code...
     }
 
 

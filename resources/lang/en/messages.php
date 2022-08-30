@@ -15,4 +15,9 @@ return [
     'password-updated' => 'Password has been updated!',
     'reset-password-fail' => 'Either your email or token is wrong!',
     'success' => 'Success!',
+    'import' => [
+        'dont_have_header' => 'File import don\'t have header',
+        'none_data' => 'File import don\'t have data',
+        'no_column_invalid' => 'Invalid number of fields for line :line.'
+    ],
 ];

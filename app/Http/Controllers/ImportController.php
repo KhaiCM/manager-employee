@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImportRequest;
+use App\Services\FormService;
 use App\Services\ImportService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -18,19 +19,19 @@ class ImportController extends Controller
     protected $importService;
 
     public function __construct(
-        UserService $userService,
+        FormService $formService,
         ImportService $importService
     ) {
-        $this->userService = $userService;
+        $this->formService = $formService;
         $this->importService = $importService;
     }
 
     public function index()
     {
-        $users = $this->userService->getListOfUsers();
+        $forms = $this->formService->getListOfForms();
 
         return view('import', [
-            'data' => $users,
+            'data' => $forms,
         ]);
     }
 
@@ -38,7 +39,7 @@ class ImportController extends Controller
     {
         $file = $request->file('uploaded_file');
 
-        $result = $this->importService->importFileToUsersTable($file);
+        $result = $this->importService->importFileToFormsTable($file);
         dd($result);
         return $result;
     }
