@@ -9,8 +9,8 @@ class FormRepository extends EloquentRepository implements FormRepositoryInterfa
 {
     /**
      * FormRepository construct
-     *
-     * Form $model
+     * 
+     * @param Form $model
      * @return void
      */
     public function __construct(Form $model)
@@ -19,12 +19,15 @@ class FormRepository extends EloquentRepository implements FormRepositoryInterfa
     }
 
     /**
-     * Get all data
+     * Get a list of forms belong to user
      *
+     * @param int $userId
      * @return mixed
      */
-    public function all()
+    public function getFormsByUser($userId)
     {
-        return $this->model->get();
+        return $this->model
+            ->where('user_id', $userId)
+            ->get();
     }
 }

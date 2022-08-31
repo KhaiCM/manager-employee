@@ -100,7 +100,7 @@ class UserController extends Controller
 
             if ($user) {
                 return defineResponse(
-                    __('messages.update-success'),
+                    __('messages.update_success'),
                     Response::HTTP_OK,
                     $user
                 );
@@ -108,7 +108,7 @@ class UserController extends Controller
         }
 
         return defineResponse(
-            __('messages.update-fail'),
+            __('messages.update_fail'),
             Response::HTTP_BAD_REQUEST,
         );
     }
@@ -125,13 +125,13 @@ class UserController extends Controller
 
         if ($result) {
             return defineResponse(
-                __('messages.delete-success'),
+                __('messages.delete_success'),
                 Response::HTTP_OK,
             );
         }
 
         return defineResponse(
-            __('messages.delete-fail'),
+            __('messages.delete_fail'),
             Response::HTTP_BAD_REQUEST,
         );
     }
