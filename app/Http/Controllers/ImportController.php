@@ -5,13 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ImportRequest;
 use App\Services\FormService;
 use App\Services\ImportService;
-use App\Services\UserService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Reader\Exception;
-use PhpOffice\PhpSpreadsheet\Writer\Xls;
-use PhpOffice\PhpSpreadsheet\IOFactory;
+use Illuminate\Http\Response;
 
 class ImportController extends Controller
 {
@@ -38,9 +32,17 @@ class ImportController extends Controller
     public function import(ImportRequest $request)
     {
         $file = $request->file('uploaded_file');
-
         $result = $this->importService->importFileToFormsTable($file);
-        dd($result);
-        return $result;
+        if ($result) {
+            return defineResponse(
+                __('messages.success'),
+                Response::HTTP_OK,
+            );
+        }
+
+        return defineResponse(
+                __('messages.error'),
+                Response::HTTP_BAD_REQUEST,
+            );
     }
 }

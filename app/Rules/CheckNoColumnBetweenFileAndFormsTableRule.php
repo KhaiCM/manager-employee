@@ -4,19 +4,18 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class MimeTypes implements Rule
+class CheckNoColumnBetweenFileAndFormsTableRule implements Rule
 {
-    protected $mimes;
-
+    protected $message;
+    
     /**
      * Create a new rule instance.
      *
-     * @param array $mimes
      * @return void
      */
-    public function __construct($mimes = [])
+    public function __construct()
     {
-        $this->mimes = $mimes;
+        //
     }
 
     /**
@@ -28,9 +27,17 @@ class MimeTypes implements Rule
      */
     public function passes($attribute, $value)
     {
-        $extension = $value->getClientOriginalExtension();
+        $data = get_data_import($value);
 
-        return in_array($extension, $this->mimes);
+        foreach ($data as $key => $row) {
+            if (count($row) != count(config('constants.import.form'))) {
+                $this->message = __('messages.import.no_column_invalid', ['line' => $key]);
+
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -40,6 +47,6 @@ class MimeTypes implements Rule
      */
     public function message()
     {
-        return 'The uploaded file must be a file of type:' . implode(', ', $this->mimes);
+        return $this->message;
     }
 }

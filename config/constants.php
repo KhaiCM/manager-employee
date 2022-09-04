@@ -3,13 +3,13 @@
 return [
     'import' => [
         'form' => [
-            'A' => 'no',
-            'B' => 'status',
-            'C' => 'start_time',
-            'D' => 'end_time',
-            'E' => 'reason',
-            'F' => 'user',
-            'G' => 'type',
+            'no' => 'A',
+            'status' => 'B',
+            'start_time' => 'C',
+            'end_time' => 'D',
+            'reason' => 'E',
+            'user' => 'F',
+            'type' => 'G',
         ],
     ]
 ];

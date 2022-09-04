@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class FileName implements Rule
+class CheckFileNameWhenImportRule implements Rule
 {
     protected $max_words;
 
