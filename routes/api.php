@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('/change-status-form/{form}', [FormController::class, 'changeStatusByAdmin']);
     Route::patch('/change-information-form/{form}', [FormController::class, 'changeInfoOnlyEmployee']);
 });
+
+Route::get('/home', [HomeController::class, 'index']);
