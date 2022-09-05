@@ -17,4 +17,21 @@ return [
     'password_updated' => 'Password has been updated!',
     'reset_password_fail' => 'Either your email or token is wrong!',
     'success' => 'Success!',
+    'error' => 'Error!',
+    'import' => [
+        'dont_have_header' => 'File import don\'t have header',
+        'none_data' => 'File import don\'t have data',
+        'no_column_invalid' => 'Invalid number of fields for line :line.',
+        'validate_cell' => [
+            'required' => 'The cell :cell:attribute is required.',
+            'enum_value' => 'The cell :cell:attribute is invalid.',
+            'date_format' => 'The cell :cell:attribute does not match the format :format.',
+            'after' => 'The cell :cell:attribute must be a date after :date.',
+            'string' => 'The cell :cell:attribute must be a string.',
+            'numeric' => 'The cell :cell:attribute must be a number.',
+            'exists' => 'The cell :cell:attribute is invalid.',
+        ],
+        'check_file_type' => 'The uploaded file must be a file of type: :mimes',
+        'check_file_name' => 'The file name must not be greater than :max_words characters.',
+    ],
 ];
