@@ -31,5 +31,7 @@ return [
             'numeric' => 'The cell :cell:attribute must be a number.',
             'exists' => 'The cell :cell:attribute is invalid.',
         ],
+        'check_file_type' => 'The uploaded file must be a file of type: :mimes',
+        'check_file_name' => 'The file name must not be greater than :max_words characters.',
     ],
 ];

@@ -34,44 +34,40 @@ if (!function_exists('defineResponse')) {
     }
 }
 
-if (!function_exists('get_data_import')) {
+if (!function_exists('getDataImport')) {
     /**
      * Get data import
      *
      * @param $file
-     * @param bool $returnHeader
+     * @param bool $header
      * @return mixed
      */
-    function get_data_import($file, $returnHeader = false)
+    function getDataImport($file, $header = false)
     {
         $extension = $file->getClientOriginalExtension();
 
         switch ($extension) {
-            case 'csv':
+            case config('constants.mimes.csv'): // csv
                 $reader = new Csv();
                 $sheetData = $reader->setDelimiter(',');
-
                 break;
-            case 'tsv':
+            case config('constants.mimes.tsv'): // tsv
                 $reader = IOFactory::createReader('Csv');
                 $sheetData = $reader->setDelimiter("\t");
-
                 break;
-            case 'xlsx':
+            case config('constants.mimes.xlsx'): // xlsx
                 $reader = new Xlsx();
-
                 break;
-            default:
+            case config('constants.mimes.xls'): // xls
                 $reader = new Xls();
-
                 break;
         }
 
         $sheetData = $reader->load($file)
-                ->getActiveSheet()
-                ->toArray(null, true, true, true);
+            ->getActiveSheet()
+            ->toArray(null, true, true, true);
 
-        if (!$returnHeader) {
+        if (!$header) {
             array_shift($sheetData);
         }
 
@@ -79,7 +75,7 @@ if (!function_exists('get_data_import')) {
     }
 }
 
-if (!function_exists('strToSlug')) {
+if (!function_exists('slug')) {
     /**
      * Create slug
      *
@@ -87,31 +83,31 @@ if (!function_exists('strToSlug')) {
      * @param string $separator
      * @return string
      */
-    function strToSlug($title, $separator = '_')
+    function slug($title, $separator = '_')
     {
         // Convert all dashes/underscores into separator
         $flip = $separator === '-' ? '_' : '-';
 
-        $title = preg_replace('!['.preg_quote($flip).']+!u', $separator, $title);
+        $title = preg_replace('![' . preg_quote($flip) . ']+!u', $separator, $title);
 
         // Remove all characters that are not the separator, letters, numbers, or whitespace.
-        $title = preg_replace('![^'.preg_quote($separator).'\pL\pN\s]+!u', '', strtolower($title));
+        $title = preg_replace('![^' . preg_quote($separator) . '\pL\pN\s]+!u', '', strtolower($title));
 
         // Replace all separator characters and whitespace by a single separator
-        $title = preg_replace('!['.preg_quote($separator).'\s]+!u', $separator, $title);
+        $title = preg_replace('![' . preg_quote($separator) . '\s]+!u', $separator, $title);
 
         return trim($title, $separator);
     }
 }
 
-if (!function_exists('valOfCell')) {
+if (!function_exists('getValueOfCell')) {
     /**
      * Get value of cell except space
      *
      * @param string $cell
      * @return string
      */
-    function valOfCell($cell)
+    function getValueOfCell($cell)
     {
         $value = trim($cell);
 

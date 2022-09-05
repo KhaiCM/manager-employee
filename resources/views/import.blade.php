@@ -23,13 +23,6 @@
                         <h4 class="card-title">Import Excel Data</h4>
                     </div>
                     <div class="card-body">
-                        @if ($mess = Session::get('success'))
-                            <div class="alert alert-success alert-block">
-                                <button type="button" class="close" data-dismiss="alert">×</button>
-                                <strong>{{ $mess }}</strong>
-                            </div>
-                            <br>
-                        @endif
                         <form action="{{ route('import') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <fieldset>

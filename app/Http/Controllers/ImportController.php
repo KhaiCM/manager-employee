@@ -51,6 +51,7 @@ class ImportController extends Controller
     {
         $file = $request->file('uploaded_file');
         $result = $this->importService->importFileToFormsTable($file);
+
         if ($result) {
             return defineResponse(
                 __('messages.success'),

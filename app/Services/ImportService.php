@@ -29,24 +29,24 @@ class ImportService
      */
     public function importFileToFormsTable($file): bool
     {
-        $data = get_data_import($file);
+        $data = getDataImport($file);
+
+        $data_insert = [];
 
         foreach ($data as $key => $row) {
-            $form = $this->formRepository->create([
+            array_push($data_insert, [
                 'id' => Str::uuid(),
-                'status' => valOfCell($row[config('constants.import.form.status')]),
-                'start_time' => valOfCell($row[config('constants.import.form.start_time')]),
-                'end_time' => valOfCell($row[config('constants.import.form.end_time')]),
-                'reason' => valOfCell($row[config('constants.import.form.reason')]),
-                'user_id' => valOfCell($row[config('constants.import.form.user')]),
-                'm_type_form_id' => valOfCell($row[config('constants.import.form.type')]),
+                'status' => getValueOfCell($row[config('constants.import.form.status')]),
+                'start_time' => getValueOfCell($row[config('constants.import.form.start_time')]),
+                'end_time' => getValueOfCell($row[config('constants.import.form.end_time')]),
+                'reason' => getValueOfCell($row[config('constants.import.form.reason')]),
+                'user_id' => getValueOfCell($row[config('constants.import.form.user')]),
+                'm_type_form_id' => getValueOfCell($row[config('constants.import.form.type')]),
             ]);
-
-            if (!$form) {
-                return false;
-            }
         }
 
-        return true;
+        $result = $this->formRepository->insert($data_insert);
+
+        return $result;
     }
 }

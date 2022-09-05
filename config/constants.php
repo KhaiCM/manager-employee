@@ -11,5 +11,16 @@ return [
             'user' => 'F',
             'type' => 'G',
         ],
-    ]
+    ],
+    'mimes' => [
+        'csv' => 'csv',
+        'tsv' => 'tsv',
+        'xlsx' => 'xlsx',
+        'xls' => 'xls',
+    ],
+    'validate' => [
+        'file_name' => [
+            'max' => 100,
+        ],
+    ],
 ];

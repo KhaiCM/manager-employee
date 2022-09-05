@@ -2,12 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\CheckDataImportDiffEmptyRule;
-use App\Rules\CheckFileNameWhenImportRule;
-use App\Rules\CheckFileTypeWhenImportRule;
-use App\Rules\CheckHeaderOfFileWhenImportRule;
-use App\Rules\CheckNoColumnBetweenFileAndFormsTableRule;
-use App\Rules\ValidateEveryCellFileImportRule;
+use App\Rules\CheckFileWhenImportRule;
+use App\Rules\ValidateDataWhenImportRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ImportRequest extends FormRequest
@@ -37,12 +33,11 @@ class ImportRequest extends FormRequest
                 'min:0',
                 'not_in:0',
                 'max:4096',
-                new CheckFileTypeWhenImportRule(['csv','tsv','xls','xlsx']),
-                new CheckFileNameWhenImportRule(100),
-                new CheckHeaderOfFileWhenImportRule(),
-                new CheckDataImportDiffEmptyRule(),
-                new CheckNoColumnBetweenFileAndFormsTableRule(),
-                new ValidateEveryCellFileImportRule(),
+                new CheckFileWhenImportRule(
+                    ['csv','tsv','xls','xlsx'],
+                    config('constants.validate.file_name.max')
+                ),
+                new ValidateDataWhenImportRule(),
             ],
         ];
     }
