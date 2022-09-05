@@ -63,7 +63,7 @@ if (!function_exists('get_data_import')) {
                 break;
             default:
                 $reader = new Xls();
-                
+
                 break;
         }
 
@@ -80,6 +80,13 @@ if (!function_exists('get_data_import')) {
 }
 
 if (!function_exists('strToSlug')) {
+    /**
+     * Create slug
+     *
+     * @param string $title
+     * @param string $separator
+     * @return string
+     */
     function strToSlug($title, $separator = '_')
     {
         // Convert all dashes/underscores into separator
@@ -98,6 +105,12 @@ if (!function_exists('strToSlug')) {
 }
 
 if (!function_exists('valOfCell')) {
+    /**
+     * Get value of cell except space
+     *
+     * @param string $cell
+     * @return string
+     */
     function valOfCell($cell)
     {
         $value = trim($cell);

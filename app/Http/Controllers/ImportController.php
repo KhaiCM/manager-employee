@@ -16,6 +16,7 @@ class ImportController extends Controller
      * Create a new ImportController instance.
      *
      * @param ImportService $importService
+     * @param FormService $formService
      * @return void
      */
     public function __construct(

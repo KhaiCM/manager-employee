@@ -35,30 +35,30 @@ class ValidateEveryCellFileImportRule implements Rule
         $rules = [
             config('constants.import.form.status') => [
                 'required',
-                new EnumValue(StatusForm::class, false)
+                new EnumValue(StatusForm::class, false),
             ],
             config('constants.import.form.start_time') => [
                 'required',
-                'date_format:Y-m-d H:i'
+                'date_format:Y-m-d H:i',
             ],
             config('constants.import.form.end_time') => [
                 'required',
                 'date_format:Y-m-d H:i',
-                'after:start_time'
+                'after:start_time',
             ],
             config('constants.import.form.reason') => [
                 'nullable',
-                'string'
+                'string',
             ],
             config('constants.import.form.user') => [
                 'required',
                 'numeric',
-                'exists:users,id'
+                'exists:users,id',
             ],
             config('constants.import.form.type') => [
                 'required',
                 'numeric',
-                'exists:m_type_forms,id'
+                'exists:m_type_forms,id',
             ],
         ];
 
