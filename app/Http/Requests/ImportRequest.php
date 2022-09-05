@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\CheckFileWhenImportRule;
-use App\Rules\ValidateDataWhenImportRule;
+use App\Rules\CheckTypeAndNameOfFileRule;
+use App\Rules\ValidateDataOfFileRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ImportRequest extends FormRequest
@@ -33,11 +33,11 @@ class ImportRequest extends FormRequest
                 'min:0',
                 'not_in:0',
                 'max:4096',
-                new CheckFileWhenImportRule(
+                new CheckTypeAndNameOfFileRule(
                     ['csv','tsv','xls','xlsx'],
-                    config('constants.validate.file_name.max')
+                    config('constants.validate.file_name.max') // 100
                 ),
-                new ValidateDataWhenImportRule(),
+                new ValidateDataOfFileRule(),
             ],
         ];
     }

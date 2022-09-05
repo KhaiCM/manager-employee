@@ -7,7 +7,7 @@ use BenSampo\Enum\Rules\EnumValue;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
-class ValidateDataWhenImportRule implements Rule
+class ValidateDataOfFileRule implements Rule
 {
     protected $message;
 

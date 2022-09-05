@@ -4,12 +4,8 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class CheckFileWhenImportRule implements Rule
+class CheckTypeAndNameOfFileRule
 {
-    protected $mimes;
-    protected $max_words;
-    protected $message;
-
     /**
      * Create a new rule instance.
      *

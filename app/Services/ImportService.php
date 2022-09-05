@@ -36,12 +36,12 @@ class ImportService
         foreach ($data as $key => $row) {
             array_push($data_insert, [
                 'id' => Str::uuid(),
-                'status' => getValueOfCell($row[config('constants.import.form.status')]),
-                'start_time' => getValueOfCell($row[config('constants.import.form.start_time')]),
-                'end_time' => getValueOfCell($row[config('constants.import.form.end_time')]),
-                'reason' => getValueOfCell($row[config('constants.import.form.reason')]),
-                'user_id' => getValueOfCell($row[config('constants.import.form.user')]),
-                'm_type_form_id' => getValueOfCell($row[config('constants.import.form.type')]),
+                'status' => getValueOfCell($row[config('constants.import.form.status')]), // B
+                'start_time' => getValueOfCell($row[config('constants.import.form.start_time')]), // C
+                'end_time' => getValueOfCell($row[config('constants.import.form.end_time')]), // D
+                'reason' => getValueOfCell($row[config('constants.import.form.reason')]), // E
+                'user_id' => getValueOfCell($row[config('constants.import.form.user')]), //F
+                'm_type_form_id' => getValueOfCell($row[config('constants.import.form.type')]), // G
             ]);
         }
 
