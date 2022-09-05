@@ -16,12 +16,18 @@ class ImportService
      * @return void
      */
     public function __construct(
-        FormRepositoryInterface $formRepository,
+        FormRepositoryInterface $formRepository
     ) {
         $this->formRepository = $formRepository;
     }
 
-    public function importFileToFormsTable($file)
+    /**
+     * Import data into forms table.
+     *
+     * @param $file
+     * @return bool
+     */
+    public function importFileToFormsTable($file): bool
     {
         $data = get_data_import($file);
 
@@ -36,7 +42,7 @@ class ImportService
                 'm_type_form_id' => valOfCell($row[config('constants.import.form.type')]),
             ]);
 
-            if (! $form) {
+            if (!$form) {
                 return false;
             }
         }

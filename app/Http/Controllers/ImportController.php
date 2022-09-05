@@ -12,6 +12,12 @@ class ImportController extends Controller
     protected $userService;
     protected $importService;
 
+    /**
+     * Create a new ImportController instance.
+     *
+     * @param ImportService $importService
+     * @return void
+     */
     public function __construct(
         FormService $formService,
         ImportService $importService
@@ -20,6 +26,11 @@ class ImportController extends Controller
         $this->importService = $importService;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return view
+     */
     public function index()
     {
         $forms = $this->formService->getListOfForms();
@@ -29,6 +40,12 @@ class ImportController extends Controller
         ]);
     }
 
+    /**
+     * Import data into forms table
+     *
+     * @param ImportRequest $request
+     * @return JsonResponse
+     */
     public function import(ImportRequest $request)
     {
         $file = $request->file('uploaded_file');
@@ -41,8 +58,8 @@ class ImportController extends Controller
         }
 
         return defineResponse(
-                __('messages.error'),
-                Response::HTTP_BAD_REQUEST,
-            );
+            __('messages.error'),
+            Response::HTTP_BAD_REQUEST,
+        );
     }
 }

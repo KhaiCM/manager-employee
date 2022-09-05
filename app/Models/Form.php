@@ -48,7 +48,7 @@ class Form extends Model
      */
     public function user()
     {
-        $this->belongsTo(User::class, 'user_id');
+        $this->belongsTo(User::class);
     }
 
     /**
@@ -58,6 +58,6 @@ class Form extends Model
      */
     public function mTypeForm()
     {
-        $this->belongsTo(MTypeForm::class, 'm_type_form_id');
+        $this->belongsTo(MTypeForm::class);
     }
 }

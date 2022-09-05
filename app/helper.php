@@ -4,6 +4,7 @@ use Illuminate\Http\JsonResponse;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
 use PhpOffice\PhpSpreadsheet\Reader\Xls;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 if (!function_exists('defineResponse')) {
     /**
@@ -33,119 +34,12 @@ if (!function_exists('defineResponse')) {
     }
 }
 
-if (!function_exists('get_csv_data')) {
-    /**
-     * Get csv file data
-     * 
-     * @param $file
-     * @param bool $returnHeader
-     * @return mixed
-     */
-    function get_csv_data($file, $returnHeader = false)
-    {
-        $reader = new Csv();
-
-        $sheetData = $reader->setDelimiter(',')
-                ->setInputEncoding('Shift-JIS')
-                ->load($file)
-                ->getActiveSheet()
-                ->toArray(null, true, true, true);
-
-        if (!$returnHeader) {
-            array_shift($sheetData);
-        }
-
-        return $sheetData;
-    }
-}
-
-if (!function_exists('get_tsv_data')) {
-    /**
-     * Get tsv file data
-     * @param $file
-     * @return mixed
-     */
-    function get_tsv_data($file)
-    {
-        $currentLocale = setlocale(LC_ALL, '0'); // Backup current locale.
-
-        setlocale(LC_ALL, 'ja_JP.UTF-8');
-
-        // Read the file content in SJIS-Win.
-        $content = file_get_contents($file);
-
-        // Convert file content to SJIS-Win.
-        $content = mb_convert_encoding($content, 'UTF-8', 'SJIS-win');
-
-        // Save the file as UTF-8 in a temp location.
-        $fp = tmpfile();
-        fwrite($fp, $content);
-        rewind($fp);
-
-        setlocale(LC_ALL, $currentLocale); // Restore the backed-up locale.
-        $array = [];
-
-        while (($data = fgetcsv($fp, 1000, ',')) !== false) {
-            $array[] = $data;
-        }
-
-        return $array;
-    }
-}
-
-if (!function_exists('get_xlsx_data')) {
-    /**
-     * Get xlsx file data
-     * 
-     * @param $file
-     * @param bool $returnHeader
-     * @return mixed
-     */
-    function get_xlsx_data($file, $returnHeader = false)
-    {
-        $reader = new Xlsx();
-
-        $sheetData = $reader->load($file)
-                ->getActiveSheet()
-                ->toArray(null, true, true, true);
-
-        if (!$returnHeader) {
-            array_shift($sheetData);
-        }
-
-        return $sheetData;
-    }
-}
-
-if (!function_exists('get_xls_data')) {
-    /**
-     * Get xls file data
-     * 
-     * @param $file
-     * @param bool $returnHeader
-     * @return mixed
-     */
-    function get_xls_data($file, $returnHeader = false)
-    {
-        $reader = new Xls();
-
-        $sheetData = $reader->load($file)
-                ->getActiveSheet()
-                ->toArray(null, true, true, true);
-
-        if (!$returnHeader) {
-            array_shift($sheetData);
-        }
-
-        return $sheetData;
-    }
-}
-
 if (!function_exists('get_data_import')) {
     /**
      * Get data import
-     * 
+     *
      * @param $file
+     * @param bool $returnHeader
      * @return mixed
      */
     function get_data_import($file, $returnHeader = false)
@@ -154,17 +48,31 @@ if (!function_exists('get_data_import')) {
 
         switch ($extension) {
             case 'csv':
-                $sheetData = get_csv_data($file, $returnHeader);
+                $reader = new Csv();
+                $sheetData = $reader->setDelimiter(',');
+
                 break;
             case 'tsv':
-                $sheetData = get_tsv_data($file, $returnHeader);
+                $reader = IOFactory::createReader('Csv');
+                $sheetData = $reader->setDelimiter("\t");
+
                 break;
             case 'xlsx':
-                $sheetData = get_xlsx_data($file, $returnHeader);
+                $reader = new Xlsx();
+
                 break;
             default:
-                $sheetData = get_xls_data($file, $returnHeader);
+                $reader = new Xls();
+                
                 break;
+        }
+
+        $sheetData = $reader->load($file)
+                ->getActiveSheet()
+                ->toArray(null, true, true, true);
+
+        if (!$returnHeader) {
+            array_shift($sheetData);
         }
 
         return $sheetData;
