@@ -24,7 +24,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
 });
 
-Route::group(['middleware' => 'auth:api'], function () {
+Route::group(['middleware' => 'authorization'], function () {
     Route::post('/auth/logout', [AuthController::class, 'logout'])->name('logout');
     Route::resource('/users', UserController::class)->except(['create', 'store']);
     Route::resource('/forms', FormController::class)->only(['index', 'store', 'destroy']);
