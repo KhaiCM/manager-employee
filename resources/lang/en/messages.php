@@ -17,4 +17,9 @@ return [
     'password_updated' => 'Password has been updated!',
     'reset_password_fail' => 'Either your email or token is wrong!',
     'success' => 'Success!',
+    'token' => [
+        'invalid' => 'Token is Invalid!',
+        'expired' => 'Token is Expired!',
+        'not_found' => 'Authorization Token not found!',
+    ],
 ];

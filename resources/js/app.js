@@ -5,11 +5,17 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import App from './App.vue';
 import Router from './routes';
-import auth from './helpers/auth';
+
+axios.defaults.withCredentials = true
+axios.defaults.baseURL = 'http://localhost:8000/api';
+const token = localStorage.getItem('token')
+if (token) {
+    axios.defaults.headers.common['Authorization'] = token
+}
+
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
-axios.defaults.baseURL = 'http://localhost:8000/api';
+
 Vue.router = Router
-Vue.use(require('@websanova/vue-auth'), auth);
 App.router = Vue.router
 new Vue(App).$mount('#app');
