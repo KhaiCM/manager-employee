@@ -10,11 +10,24 @@ class FormRepository extends EloquentRepository implements FormRepositoryInterfa
     /**
      * FormRepository construct
      * 
-     * Form $model
+     * @param Form $model
      * @return void
      */
     public function __construct(Form $model)
     {
         $this->model = $model;
+    }
+
+    /**
+     * Get a list of forms belong to user
+     *
+     * @param int $userId
+     * @return mixed
+     */
+    public function getFormsByUser($userId)
+    {
+        return $this->model
+            ->where('user_id', $userId)
+            ->get();
     }
 }

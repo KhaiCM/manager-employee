@@ -2,12 +2,15 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\StatusForm;
 use App\Traits\FailedValidation;
 use Illuminate\Foundation\Http\FormRequest;
+use BenSampo\Enum\Rules\EnumValue;
 
-class SendPasswordResetMailRequest extends FormRequest
+class ChangeStatusFormRequest extends FormRequest
 {
     use FailedValidation;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,7 +29,10 @@ class SendPasswordResetMailRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|exists:users',
+            'status' => [
+                'required',
+                new EnumValue(StatusForm::class, false),
+            ],
         ];
     }
 }

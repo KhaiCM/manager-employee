@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\FormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,11 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('reset-password');
 });
 
-Route::group(['prefix' => 'auth', 'middleware' => 'auth:api'], function () {
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::post('/auth/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::resource('/users', UserController::class)->except(['create', 'store']);
+    Route::resource('/forms', FormController::class)->only(['index', 'store', 'destroy']);
+    Route::get('/list-forms', [FormController::class, 'getListFormsBelongUser']);
+    Route::patch('/change-status-form/{form}', [FormController::class, 'changeStatusByAdmin']);
+    Route::patch('/change-information-form/{form}', [FormController::class, 'changeInfoOnlyEmployee']);
 });

@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\DateHasSpecificMinutes;
 use App\Traits\FailedValidation;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SendPasswordResetMailRequest extends FormRequest
+class CreateFormRequest extends FormRequest
 {
     use FailedValidation;
     /**
@@ -26,7 +27,10 @@ class SendPasswordResetMailRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|exists:users',
+            'start_time' => ['required', 'date_format:Y/m/d H:i'],
+            'end_time' => ['required', 'date_format:Y/m/d H:i', 'after:start_time'],
+            'reason' => ['nullable', 'string'],
+            'm_type_form_id' => ['required', 'numeric', 'exists:m_type_forms,id'],
         ];
     }
 }
